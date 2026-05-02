@@ -1,11 +1,1111 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import SiteShell from '../components/SiteShell.astro';
+import headshot from '../assets/headshot.png';
+import chronolensImage from '../assets/chronolens.png';
+import luckyShrubImage from '../assets/luckyshrub.png';
+import skybookerImage from '../assets/skybooker.png';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const timeline = [
+	{
+		dates: 'October 2025 to January 2026',
+		role: 'CROSS-PLATFORM FRONT-END ENGINEER / WIMTACH',
+		description:
+			'WIMTACH - Toronto (contract)',
+	},
+	{
+		dates: 'September 2023 to April 2026',
+		role: 'SOFTWARE ENGINEERING TECHNOLOGY - AI',
+		description:
+			'Centennial College - Toronto (advanced diploma)',
+	}
+];
+
+const projects = [
+	{
+		title: 'NorthAuto',
+		href: 'https://github.com/AndrewTsebriiSigma/North-Auto',
+		summary:
+			'A transfer learning car image classifier trained on CompCars to identify make, model, and year from car photos, with an added RAG chatbot for car-related questions.',
+		tags: ['React', 'Python', 'TensorFlow', 'FastAPI', 'InceptionV3', 'CompCars', 'RAG'],
+	},
+	{
+		title: 'ChronoLens',
+		href: 'https://chronolens-blue.vercel.app/',
+		image: chronolensImage,
+		summary:
+			'A face gender, race, and age estimator using age distribution encoding, weighted sampling, and a hierarchical model pipeline for more structured prediction.',
+		tags: ['React', 'Python', 'TensorFlow', 'FastAPI', 'ResNet50', 'UTKFaces', 'Deep learning', 'RetinaFace'],
+	},
+	{
+		title: 'SkyBooker',
+		href: 'https://sky-booker.vercel.app/',
+		image: skybookerImage,
+		summary:
+			'A responsive flight booking interface focused on clear user flows and responsive front-end implementation.',
+		tags: ['React', 'Node.js', 'Oracle DB'],
+	},
+	{
+		title: 'Pokedex',
+		href: 'https://pokedex-l5ee.onrender.com/search',
+		summary:
+			'A responsive Pokemon team-building and catalog app designed for search, organization, and team creation.',
+		tags: ['React', 'Node.js', 'MongoDB', 'Google Auth'],
+	},
+	{
+		title: 'Lucky Shrub',
+		href: 'https://dltvn.github.io/Lucky-Shrub/',
+		image: luckyShrubImage,
+		summary:
+			'A plant shop landing page focused on layout clarity and responsive presentation.',
+		tags: ['HTML', 'CSS'],
+	},
+];
+
+const posts = [];
+
+const homeLinks = [
+	{ label: 'About', href: '#about' },
+	{ label: 'Timeline', href: '#timeline' },
+	{ label: 'Projects', href: '#projects' },
+	{ label: 'Blog', href: '#blog' },
+];
 ---
 
+
 <Layout>
-	<Welcome />
+	<SiteShell>
+		<section id="home" class="section section-dark full-height-section home-section">
+			<div class="home-stage" aria-label="Section links">
+				<div class="home-pills">
+					{
+						homeLinks.map((link) => (
+							<a
+								class="home-pill"
+								href={link.href}
+								draggable="false"
+								data-draggable-pill
+							>
+								{link.label}
+							</a>
+						))
+					}
+				</div>
+				<h1 class="home-name" aria-label="Denys Lytvyn"><span>DENYS LYTVYN</span></h1>
+			</div>
+		</section>
+
+		<section id="about" class="section section-light full-height-section">
+			<div class="section-inner about-layout">
+				<div class="about-header">
+					<h1 class="top-heading on-light">About me</h1>
+				</div>
+				<div class="about-copy flow-copy">
+					<p>
+						I'm a fresh graduate from Software Engineering Technology - AI program at Centennial College, and that is the area I am
+						most drawn to. I love the pace of the field, the ideas behind it, and the chance
+						to work on new tech advancements.
+					</p>
+					<p>
+						I am also very interested in frontend work. I enjoy and appreciate good design and user experience, and I like the creativity involved in building for the frontend.
+					</p>
+					<p>
+						I already have experience building for the frontend, and I want to keep growing
+						in both directions: staying close to AI while continuing to become stronger at
+						user interface design and development.
+					</p>
+					<div class="about-actions">
+						<a class="about-pill" href="/resume.pdf" download>Get my resume</a>
+						<a class="about-pill" href="mailto:denysltvn@gmail.com">Email me</a>
+					</div>
+				</div>
+				<div class="headshot-block">
+					<img class="headshot-image" src={headshot.src} alt="Portrait of Denys Lytvyn" />
+				</div>
+			</div>
+		</section>
+
+		<section id="timeline" class="section section-dark full-height-section">
+			<div class="section-inner timeline-wrap">
+				<h2 class="top-heading">Timeline</h2>
+				<div class="timeline-list">
+					{
+						timeline.map((item, index) => (
+							<Fragment>
+								<article class="timeline-entry">
+									<p class="date-pill">{item.dates}</p>
+									<div class="timeline-copy">
+										<p class="timeline-role">{item.role}</p>
+										<p>{item.description}</p>
+									</div>
+								</article>
+								{index < timeline.length - 1 && (
+									<div class="timeline-dashes" aria-hidden="true">
+										<span></span>
+										<span></span>
+										<span></span>
+										<span></span>
+										<span></span>
+									</div>
+								)}
+							</Fragment>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section id="projects" class="section section-light full-height-section section-light-alt">
+			<div class="section-inner section-list-wrap">
+				<div class="top-heading-wrap">
+					<h2 class="top-heading on-light">Projects</h2>
+				</div>
+				<div class="project-list">
+					{
+						projects.map((project) => (
+							<article class="project-row">
+								<div class="project-body">
+									<h3>
+										<a class="project-title-link" href={project.href} target="_blank" rel="noreferrer">
+											{project.title}
+										</a>
+									</h3>
+									<p>{project.summary}</p>
+									<ul class="tag-list" aria-label={`${project.title} topics`}>
+										{project.tags.map((tag) => <li>{tag}</li>)}
+									</ul>
+									<a class="project-pill" href={project.href} target="_blank" rel="noreferrer">View project</a>
+								</div>
+								{
+									project.image ? (
+										<div class="project-image-frame">
+											<img class="project-image" src={project.image.src} alt={`${project.title} preview`} />
+										</div>
+									) : (
+										<div class="project-image-placeholder" aria-hidden="true"></div>
+									)
+								}
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section id="blog" class="section section-dark full-height-section section-dark-alt">
+			<div class="section-inner section-list-wrap">
+				<div class="top-heading-wrap">
+					<h2 class="top-heading">Blog</h2>
+				</div>
+				<div class="writing-list">
+					{posts.length > 0 &&
+						posts.map((post) => (
+							<article class="writing-row">
+								<h3>{post.title}</h3>
+								<p>{post.blurb}</p>
+								<a class="blog-pill" href="#blog">Read more</a>
+							</article>
+						))}
+				</div>
+			</div>
+		</section>
+	</SiteShell>
 </Layout>
+
+<script>
+	const stage = document.querySelector('.home-stage');
+	const name = document.querySelector('.home-name');
+	const nameText = name?.querySelector('span') ?? null;
+	const pillLayer = document.querySelector('.home-pills');
+
+	if (
+		stage instanceof HTMLElement &&
+		name instanceof HTMLElement &&
+		nameText instanceof HTMLElement &&
+		pillLayer instanceof HTMLElement
+	) {
+		const heroInset = 24;
+
+		const config = {
+			gravity: 2200,
+			airDrag: 0.992,
+			bounce: 0.58,
+			wallBounce: 0.7,
+			floorFriction: 0.985,
+			dragThreshold: 8,
+			sampleWindow: 140,
+			floorGap: heroInset,
+		};
+
+		let boundsWidth = 0;
+		let boundsHeight = 0;
+		let floorY = 0;
+		let previousFrame = performance.now();
+		let fitQueued = false;
+
+		const bodies = Array.from(document.querySelectorAll('[data-draggable-pill]')).map((pill) => ({
+			element: pill,
+			x: 0,
+			y: 0,
+			vx: 0,
+			vy: 0,
+			width: 0,
+			height: 0,
+			pointerId: null,
+			grabOffsetX: 0,
+			grabOffsetY: 0,
+			dragStartX: 0,
+			dragStartY: 0,
+			isDragging: false,
+			didDrag: false,
+			suppressClick: false,
+			samples: [],
+		}));
+
+		const fitHomeName = () => {
+			const style = getComputedStyle(name);
+			const availableWidth =
+				name.clientWidth -
+				Number.parseFloat(style.paddingLeft) -
+				Number.parseFloat(style.paddingRight);
+			nameText.style.fontSize = '';
+
+			const measuredWidth = nameText.scrollWidth;
+			if (!measuredWidth) {
+				return;
+			}
+
+			const baseSize = parseFloat(getComputedStyle(nameText).fontSize);
+			const fittedSize = (availableWidth / measuredWidth) * baseSize;
+			nameText.style.fontSize = `${Math.max(42, fittedSize)}px`;
+		};
+
+		const queueFitHomeName = () => {
+			if (fitQueued) {
+				return;
+			}
+
+			fitQueued = true;
+			requestAnimationFrame(() => {
+				fitQueued = false;
+				fitHomeName();
+				updateMetrics();
+			});
+		};
+
+		const updateMetrics = () => {
+			boundsWidth = pillLayer.clientWidth;
+			boundsHeight = pillLayer.clientHeight;
+			floorY = Math.max(0, name.offsetTop - config.floorGap);
+
+			for (const body of bodies) {
+				body.width = body.element.offsetWidth;
+				body.height = body.element.offsetHeight;
+				body.x = Math.min(Math.max(0, body.x), Math.max(0, boundsWidth - body.width));
+				body.y = Math.min(Math.max(0, body.y), Math.max(0, floorY - body.height));
+				renderBody(body);
+			}
+		};
+
+		const renderBody = (body) => {
+			body.element.style.left = `${body.x}px`;
+			body.element.style.top = `${body.y}px`;
+		};
+
+		const scatterBodies = () => {
+			for (const body of bodies) {
+				const maxX = Math.max(0, boundsWidth - body.width);
+				const maxY = Math.max(0, floorY - body.height);
+				body.x = Math.random() * maxX;
+				body.y = Math.random() * maxY;
+				body.vx = (Math.random() - 0.5) * 180;
+				body.vy = Math.random() * 140;
+				body.pointerId = null;
+				body.isDragging = false;
+				body.didDrag = false;
+				body.suppressClick = false;
+				body.samples = [];
+				body.element.classList.remove('is-dragging');
+				renderBody(body);
+			}
+
+			resolveCollisions();
+			for (const body of bodies) {
+				renderBody(body);
+			}
+		};
+
+		const velocityFromSamples = (body) => {
+			const latest = body.samples[body.samples.length - 1];
+			if (!latest) {
+				return { vx: 0, vy: 0 };
+			}
+
+			const earliest = body.samples.find(
+				(sample) => latest.time - sample.time <= config.sampleWindow,
+			);
+
+			if (!earliest || latest.time === earliest.time) {
+				return { vx: 0, vy: 0 };
+			}
+
+			const dt = (latest.time - earliest.time) / 1000;
+			return {
+				vx: (latest.x - earliest.x) / dt,
+				vy: (latest.y - earliest.y) / dt,
+			};
+		};
+
+		const applyBounds = (body) => {
+			const maxX = Math.max(0, boundsWidth - body.width);
+			const maxY = Math.max(0, floorY - body.height);
+
+			if (body.x <= 0) {
+				body.x = 0;
+				body.vx = Math.abs(body.vx) * config.wallBounce;
+			}
+
+			if (body.x >= maxX) {
+				body.x = maxX;
+				body.vx = -Math.abs(body.vx) * config.wallBounce;
+			}
+
+			if (body.y <= 0) {
+				body.y = 0;
+				body.vy = Math.abs(body.vy) * config.wallBounce;
+			}
+
+			if (body.y >= maxY) {
+				body.y = maxY;
+				body.vy = -Math.abs(body.vy) * config.bounce;
+				body.vx *= config.floorFriction;
+				if (Math.abs(body.vy) < 35) {
+					body.vy = 0;
+				}
+			}
+		};
+
+		const resolveCollisions = () => {
+			for (let i = 0; i < bodies.length; i += 1) {
+				for (let j = i + 1; j < bodies.length; j += 1) {
+					const a = bodies[i];
+					const b = bodies[j];
+
+					const dx = a.x + a.width / 2 - (b.x + b.width / 2);
+					const dy = a.y + a.height / 2 - (b.y + b.height / 2);
+					const overlapX = a.width / 2 + b.width / 2 - Math.abs(dx);
+					const overlapY = a.height / 2 + b.height / 2 - Math.abs(dy);
+
+					if (overlapX <= 0 || overlapY <= 0) {
+						continue;
+					}
+
+					const aLocked = a.isDragging;
+					const bLocked = b.isDragging;
+					const distribute = (value) => {
+						if (aLocked && bLocked) {
+							return [0, 0];
+						}
+						if (aLocked) {
+							return [0, value];
+						}
+						if (bLocked) {
+							return [value, 0];
+						}
+						return [value / 2, value / 2];
+					};
+
+					if (overlapX < overlapY) {
+						const direction = dx < 0 ? -1 : 1;
+						const [moveA, moveB] = distribute(overlapX + 0.5);
+						a.x += moveA * direction;
+						b.x -= moveB * direction;
+
+						const nextVxA = b.vx * 0.92;
+						const nextVxB = a.vx * 0.92;
+						if (!aLocked) {
+							a.vx = nextVxA;
+						}
+						if (!bLocked) {
+							b.vx = nextVxB;
+						}
+					} else {
+						const direction = dy < 0 ? -1 : 1;
+						const [moveA, moveB] = distribute(overlapY + 0.5);
+						a.y += moveA * direction;
+						b.y -= moveB * direction;
+
+						const nextVyA = b.vy * 0.88;
+						const nextVyB = a.vy * 0.88;
+						if (!aLocked) {
+							a.vy = nextVyA;
+						}
+						if (!bLocked) {
+							b.vy = nextVyB;
+						}
+					}
+
+					applyBounds(a);
+					applyBounds(b);
+				}
+			}
+		};
+
+		const initializeBodies = () => {
+			fitHomeName();
+			updateMetrics();
+			scatterBodies();
+		};
+
+		const onFrame = (time) => {
+			const dt = Math.min((time - previousFrame) / 1000, 0.033);
+			previousFrame = time;
+
+			for (const body of bodies) {
+				if (body.isDragging) {
+					continue;
+				}
+
+				body.vy += config.gravity * dt;
+				body.vx *= Math.pow(config.airDrag, dt * 60);
+				body.vy *= Math.pow(config.airDrag, dt * 60);
+				body.x += body.vx * dt;
+				body.y += body.vy * dt;
+				applyBounds(body);
+			}
+
+			resolveCollisions();
+
+			for (const body of bodies) {
+				renderBody(body);
+			}
+
+			requestAnimationFrame(onFrame);
+		};
+
+		for (const body of bodies) {
+			const anchor = body.element;
+
+			const onPointerMove = (event) => {
+				if (event.pointerId !== body.pointerId) {
+					return;
+				}
+
+				const layerBounds = pillLayer.getBoundingClientRect();
+				const nextX = event.clientX - layerBounds.left - body.grabOffsetX;
+				const nextY = event.clientY - layerBounds.top - body.grabOffsetY;
+				const maxX = Math.max(0, boundsWidth - body.width);
+				const maxY = Math.max(0, floorY - body.height);
+
+				body.x = Math.min(Math.max(0, nextX), maxX);
+				body.y = Math.min(Math.max(0, nextY), maxY);
+
+				const moved = Math.hypot(body.x - body.dragStartX, body.y - body.dragStartY);
+				if (moved > config.dragThreshold) {
+					body.didDrag = true;
+					body.suppressClick = true;
+				}
+
+				body.samples.push({ x: body.x, y: body.y, time: performance.now() });
+				body.samples = body.samples.slice(-6);
+				renderBody(body);
+			};
+
+			const onPointerUp = (event) => {
+				if (event.pointerId !== body.pointerId) {
+					return;
+				}
+
+				const { vx, vy } = velocityFromSamples(body);
+				body.vx = body.didDrag ? vx : 0;
+				body.vy = body.didDrag ? vy : 0;
+				body.pointerId = null;
+				body.isDragging = false;
+				body.samples = [];
+				anchor.classList.remove('is-dragging');
+				window.removeEventListener('pointermove', onPointerMove);
+				window.removeEventListener('pointerup', onPointerUp);
+				window.removeEventListener('pointercancel', onPointerUp);
+				if (anchor.hasPointerCapture(event.pointerId)) {
+					anchor.releasePointerCapture(event.pointerId);
+				}
+			};
+
+			anchor.addEventListener('pointerdown', (event) => {
+				if (event.button !== 0) {
+					return;
+				}
+
+				event.preventDefault();
+
+				const rect = anchor.getBoundingClientRect();
+				body.pointerId = event.pointerId;
+				body.isDragging = true;
+				body.didDrag = false;
+				body.suppressClick = false;
+				body.samples = [{ x: body.x, y: body.y, time: performance.now() }];
+				body.grabOffsetX = event.clientX - rect.left;
+				body.grabOffsetY = event.clientY - rect.top;
+				body.dragStartX = body.x;
+				body.dragStartY = body.y;
+				body.vx = 0;
+				body.vy = 0;
+				anchor.classList.add('is-dragging');
+				anchor.setPointerCapture(event.pointerId);
+
+				window.addEventListener('pointermove', onPointerMove);
+				window.addEventListener('pointerup', onPointerUp);
+				window.addEventListener('pointercancel', onPointerUp);
+			});
+
+			anchor.addEventListener('click', (event) => {
+				if (body.suppressClick) {
+					event.preventDefault();
+					body.suppressClick = false;
+				}
+			});
+
+			anchor.addEventListener('dragstart', (event) => {
+				event.preventDefault();
+			});
+		}
+
+		initializeBodies();
+		window.addEventListener('resize', queueFitHomeName);
+		window.addEventListener('hashchange', scatterBodies);
+		if (document.fonts) {
+			document.fonts.ready.then(queueFitHomeName);
+		}
+		requestAnimationFrame(onFrame);
+	}
+</script>
+
+<style>
+	.home-section {
+		border-bottom: 1px solid rgba(249, 249, 249, 0.12);
+	}
+
+	.home-stage {
+		min-height: calc(100svh - var(--header-height));
+		position: relative;
+		display: grid;
+		align-items: end;
+		padding: clamp(12px, 2vw, 22px) 0 clamp(18px, 2.4vw, 28px);
+		overflow: clip;
+	}
+
+	.home-pills {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+
+	.home-pill {
+		position: absolute;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 20px 32px;
+		border: 1px solid currentColor;
+		border-radius: 999px;
+		background: var(--surface-dark);
+		color: var(--text-light);
+		text-decoration: none;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: clamp(1.2rem, 2vw, 1.65rem);
+		line-height: 1;
+		cursor: grab;
+		user-select: none;
+		pointer-events: auto;
+		touch-action: none;
+		white-space: nowrap;
+		z-index: 2;
+		transition:
+			background-color 220ms var(--ease-out),
+			border-color 220ms var(--ease-out),
+			color 220ms var(--ease-out);
+	}
+
+	.home-pill:hover,
+	.home-pill:focus-visible,
+	.home-pill.is-dragging {
+		background: var(--highlight);
+		border-color: transparent;
+		color: var(--text-dark);
+	}
+
+	.home-pill.is-dragging {
+		cursor: grabbing;
+		z-index: 3;
+	}
+
+	.home-pill:focus-visible {
+		outline: 2px solid var(--text-light);
+		outline-offset: 4px;
+	}
+
+	.home-name {
+		position: relative;
+		z-index: 1;
+		margin: 0;
+		width: 100%;
+		padding-inline: 24px;
+		line-height: 0.8;
+		letter-spacing: 0;
+		text-transform: uppercase;
+		white-space: nowrap;
+		pointer-events: none;
+	}
+
+	.home-name span {
+		display: inline-block;
+		font-family: 'Sillage', Georgia, serif;
+		font-size: clamp(3.4rem, 15.8vw, 15rem);
+		font-weight: 400;
+		line-height: inherit;
+		letter-spacing: -0.05em;
+		text-align: center;
+		transform: translateY(0.12em);
+	}
+
+	.section-light {
+		background: var(--surface-light);
+		color: var(--text-dark);
+	}
+
+	.section-dark {
+		background: var(--surface-dark);
+		color: var(--text-light);
+	}
+
+	.section-light-alt {
+		border-top: 1px solid rgba(18, 18, 18, 0.08);
+	}
+
+	.section-dark-alt {
+		border-top: 1px solid rgba(249, 249, 249, 0.12);
+	}
+
+	.about-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+		column-gap: clamp(32px, 6vw, 88px);
+		row-gap: 1.25rem;
+		align-items: center;
+	}
+
+	.about-header {
+		grid-column: 1 / -1;
+		display: flex;
+		justify-content: center;
+		margin-bottom: 0;
+	}
+
+	.about-copy {
+		max-width: 64ch;
+	}
+
+	.flow-copy > * + * {
+		margin-top: 1rem;
+	}
+
+	.about-actions {
+		display: flex;
+		gap: 14px;
+		flex-wrap: wrap;
+		padding-top: 0.5rem;
+	}
+
+	.about-pill {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		padding: 14px 20px;
+		border-radius: 999px;
+		background: var(--surface-frame);
+		color: var(--text-dark);
+		text-decoration: none;
+		font-size: 1rem;
+		line-height: 1;
+		border: 1px solid transparent;
+	}
+
+	.about-pill::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border: 1px solid currentColor;
+		border-radius: inherit;
+		opacity: 0;
+		transform: scale(0.96);
+		transition:
+			opacity 320ms var(--ease-out),
+			transform 320ms var(--ease-out);
+		pointer-events: none;
+	}
+
+	.about-pill:hover::after,
+	.about-pill:focus-visible::after {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.about-pill::after {
+			transition:
+				opacity 320ms var(--ease-out),
+				transform 320ms var(--ease-out) !important;
+		}
+	}
+
+	.about-pill:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 4px;
+	}
+
+	.blog-pill {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		padding: 14px 20px;
+		border-radius: 999px;
+		background: var(--surface-dark);
+		color: var(--text-light);
+		border: 1px solid rgba(249, 249, 249, 0.32);
+		text-decoration: none;
+		font-size: 1rem;
+		line-height: 1;
+		justify-self: start;
+		margin-top: 0.5rem;
+		transition:
+			background-color 320ms var(--ease-out),
+			color 320ms var(--ease-out),
+			border-color 320ms var(--ease-out);
+	}
+
+	.blog-pill::after {
+		content: none;
+	}
+
+	.blog-pill:hover,
+	.blog-pill:focus-visible {
+		background: var(--highlight);
+		color: var(--text-dark);
+		border-color: transparent;
+	}
+
+	.blog-pill:focus-visible {
+		outline: 2px solid var(--text-light);
+		outline-offset: 4px;
+	}
+
+	.headshot-block {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	.headshot-image {
+		width: min(100%, 460px);
+		height: auto;
+	}
+
+	.timeline-wrap h2 {
+		display: table;
+		margin: 0 auto 24px;
+		font-size: clamp(3rem, 7vw, 5.6rem);
+	}
+
+	.top-heading-wrap {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 14px;
+	}
+
+	.full-height-section .section-inner {
+		min-height: 100svh;
+		display: grid;
+		align-content: center;
+	}
+
+	.timeline-list {
+		display: grid;
+		gap: 0;
+		justify-items: center;
+	}
+
+	.timeline-entry {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 16px;
+		justify-items: center;
+		text-align: center;
+		width: min(100%, 680px);
+	}
+
+	.date-pill {
+		display: inline-flex;
+		justify-content: center;
+		padding: 10px 14px;
+		background: var(--text-dark);
+		color: var(--text-light);
+		border: 1px solid rgba(249, 249, 249, 0.22);
+		border-radius: 999px;
+		font-size: 0.82rem;
+		letter-spacing: 0.08em;
+		text-transform: lowercase;
+	}
+
+	.timeline-copy {
+		display: grid;
+		gap: 12px;
+		max-width: 58ch;
+		justify-items: center;
+	}
+
+	.timeline-role {
+		font-size: 0.9rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		line-height: 1.5;
+	}
+
+	.timeline-dashes {
+		display: grid;
+		justify-items: center;
+		gap: 10px;
+		padding: 24px 0;
+	}
+
+	.timeline-dashes span {
+		width: 1px;
+		height: 12px;
+		background: rgba(249, 249, 249, 0.3);
+	}
+
+	.section-list-wrap {
+		display: grid;
+		align-content: start;
+	}
+
+	.project-list,
+	.writing-list {
+		display: grid;
+	}
+
+	.project-row,
+	.writing-row {
+		display: grid;
+		gap: 20px;
+		padding: 24px;
+		border: 1px solid rgba(249, 249, 249, 0.2);
+		border-radius: 0;
+	}
+
+	.project-row {
+		grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+		align-items: center;
+	}
+
+	.project-list > :first-child,
+	.writing-list > :first-child {
+		border-top: 1px solid rgba(249, 249, 249, 0.2);
+	}
+
+	.section-light .project-row {
+		border-color: rgba(18, 18, 18, 0.18);
+	}
+
+	.section-light .project-list > :first-child {
+		border-top-color: rgba(18, 18, 18, 0.18);
+	}
+
+	.project-body {
+		display: grid;
+		gap: 8px;
+	}
+
+	.tag-list li {
+		font-size: 0.82rem;
+		letter-spacing: 0.08em;
+		text-transform: lowercase;
+	}
+
+	.project-body p,
+	.writing-row p {
+		max-width: 68ch;
+	}
+
+	.project-title-link {
+		text-decoration: none;
+	}
+
+	.project-title-link:hover,
+	.project-title-link:focus-visible {
+		text-decoration: underline;
+		text-underline-offset: 0.16em;
+	}
+
+	.project-body {
+		align-content: start;
+	}
+
+	.project-pill {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		justify-self: start;
+		margin-top: 0.25rem;
+		padding: 14px 20px;
+		border-radius: 999px;
+		background: var(--surface-frame);
+		color: var(--text-dark);
+		text-decoration: none;
+		font-size: 1rem;
+		line-height: 1;
+		border: 1px solid transparent;
+	}
+
+	.project-pill::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border: 1px solid currentColor;
+		border-radius: inherit;
+		opacity: 0;
+		transform: scale(0.96);
+		transition:
+			opacity 320ms var(--ease-out),
+			transform 320ms var(--ease-out);
+		pointer-events: none;
+	}
+
+	.project-pill:hover::after,
+	.project-pill:focus-visible::after {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	.project-pill:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 4px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.project-pill::after {
+			transition:
+				opacity 320ms var(--ease-out),
+				transform 320ms var(--ease-out) !important;
+		}
+	}
+
+	.project-image-placeholder {
+		min-height: 180px;
+		border: 1px solid rgba(249, 249, 249, 0.2);
+		background: rgba(249, 249, 249, 0.04);
+	}
+
+	.project-image-frame {
+		position: relative;
+		isolation: isolate;
+		background: var(--surface-light);
+	}
+
+	.project-image-frame::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(0deg, rgba(249, 249, 249, 0.08), rgba(18, 18, 18, 0.12));
+		opacity: 1;
+		pointer-events: none;
+		transition: opacity 220ms var(--ease-out);
+	}
+
+	.project-image {
+		width: 100%;
+		height: auto;
+		display: block;
+		border: 1px solid rgba(18, 18, 18, 0.18);
+		filter: grayscale(1) contrast(1.08) brightness(0.96);
+		transition: filter 220ms var(--ease-out);
+	}
+
+	.project-row:hover .project-image,
+	.project-row:focus-within .project-image {
+		filter: none;
+	}
+
+	.project-row:hover .project-image-frame::after,
+	.project-row:focus-within .project-image-frame::after {
+		opacity: 0;
+	}
+
+	.section-light .project-image-placeholder {
+		border-color: rgba(18, 18, 18, 0.18);
+		background: rgba(18, 18, 18, 0.04);
+	}
+
+	.tag-list {
+		list-style: none;
+		padding: 0;
+		margin: 2px 0 0;
+		display: flex;
+		gap: 10px;
+		flex-wrap: wrap;
+	}
+
+	.tag-list li {
+		color: rgba(249, 249, 249, 0.72);
+	}
+
+	.section-light .tag-list li {
+		color: rgba(18, 18, 18, 0.72);
+	}
+
+	@media (max-width: 960px) {
+		.home-stage {
+			padding-top: clamp(10px, 3vw, 18px);
+		}
+
+		.home-name span {
+			font-size: clamp(3.1rem, 15vw, 8.8rem);
+		}
+
+		.home-pill {
+			padding: 18px 26px;
+			font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+		}
+
+		.about-layout {
+			grid-template-columns: 1fr;
+		}
+
+		.project-row {
+			grid-template-columns: 1fr;
+		}
+
+		.headshot-block {
+			justify-content: flex-start;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.home-name {
+			line-height: 0.84;
+		}
+
+		.home-name span {
+			font-size: clamp(2.65rem, 14.7vw, 5.8rem);
+		}
+
+		.home-pill {
+			padding: 16px 22px;
+			font-size: clamp(1rem, 4vw, 1.18rem);
+			max-width: calc(100% - 32px);
+		}
+	}
+</style>
